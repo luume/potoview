@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions> <!-- base-definition -->
+<!-- 기본 -->
+ <definition name="myLayout" template="/WEB-INF/views/theme/delayout.jsp">
+  <put-attribute name="header" value="/WEB-INF/views/theme/header.jsp" />
+  <put-attribute name="body" value="" />
+  <put-attribute name="footer" value="/WEB-INF/views/theme/footer.jsp" />
+  <put-attribute name="title" value="포트폴리오 사이트" />
+ </definition> 
+ 
+ <!-- 로그인창 -->
+ <definition name="login/*" extends="myLayout" >
+ <put-attribute name="title" value="로그인창" />
+  <put-attribute name="body" value="/WEB-INF/views/login/{1}.jsp" />
+ </definition>
+ 
+ <!-- 인덱스 -->
+ <definition name="theme/*" extends="myLayout" >
+ <put-attribute name="title" value="포트폴리오 사이트" />
+  <put-attribute name="body" value="/WEB-INF/views/theme/{1}.jsp" />
+ </definition>
+ 
+ <!-- 업로드 -->
+ <definition name="upload/*" extends="myLayout" >
+ <put-attribute name="title" value="업로드" />
+  <put-attribute name="body" value="/WEB-INF/views/upload/{1}.jsp" />
+ </definition>
+ 
+ <!-- 게시판 -->
+ <definition name="board/*" extends="myLayout" >
+ <put-attribute name="title" value="게시판" />
+  <put-attribute name="body" value="/WEB-INF/views/board/{1}.jsp" />
+ </definition>
+ 
+ <!-- 에러 -->
+ <definition name="error/*" extends="myLayout" >
+ <put-attribute name="title" value="에러페이지" />
+  <put-attribute name="body" value="/WEB-INF/views/error/{1}.jsp" />
+ </definition>
+ 
+</tiles-definitions>

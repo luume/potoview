@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:sec="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+
+	
+	
+	<sec:http pattern="/js/**" security="none" />
+	<sec:http pattern="/css/**" security="none" />
+	<sec:http pattern="/img/**" security="none" />
+	<sec:http pattern="/uploadFile" security="none" />
+
+	
+
+	<sec:http auto-config="true">
+		<sec:headers>
+			<sec:frame-options policy="SAMEORIGIN"/>
+			<sec:hsts disabled="true"/>
+		</sec:headers>
+		<sec:intercept-url pattern="/uploadForm" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/login" access="hasAnyRole('ROLE_ANONYMOUS','ROLE_ADMIN','ROLE_USER')" />
+		<sec:intercept-url pattern="/index"
+			access="hasAnyRole('ROLE_ANONYMOUS','ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/**"
+			access="hasAnyRole('ROLE_ANONYMOUS','ROLE_ADMIN')" />
+
+<!-- 에러페이지 설정 -->
+<!-- 		<sec:access-denied-handler error-page="/index"/> -->
+		 <sec:form-login 
+			username-parameter="userName"
+			password-parameter="password" 
+			login-page="/login" 
+			login-processing-url="/mylogin"
+			default-target-url="/index?showImg=1"
+			authentication-failure-url="/404error" /> 
+			<sec:logout logout-url="/mylogout" invalidate-session="true"  logout-success-url="/index?showImg=0"/>
+			<sec:session-management>
+				<sec:concurrency-control max-sessions="100" expired-url="/login_duplicate"/>
+			</sec:session-management>
+
+	</sec:http>
+
+	<sec:authentication-manager>
+		<sec:authentication-provider>
+			<sec:user-service>
+				<sec:user name="admin" password="0000"
+					authorities="ROLE_ADMIN" />
+				<sec:user name="user" password="0000"
+					authorities="ROLE_USER" />
+			</sec:user-service>
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+
+
+</beans>

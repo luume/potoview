@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 추가적인 설정정보를 포함할 수 있다..... -->
+	<typeAliases>
+		<typeAlias alias="fileBoardJoinVO" type="com.kr.pv.vo.BoardFileJoinVO" />
+		<typeAlias alias="boardVO" type="com.kr.pv.vo.Pv_boardVO" />
+		<typeAlias alias="fileVO" type="com.kr.pv.vo.Pv_fileVO" />
+	</typeAliases>
+</configuration>

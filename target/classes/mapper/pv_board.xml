@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+ 	<select id="insertBoard" parameterType="boardVO">
+ 	<![CDATA[
+ 		insert into pv_board(content,title) values(#{content},#{title})
+ 		]]>
+ 	</select>
+ 	
+ 	<select id="selectMax" resultType="Integer">
+ 		select max(pv_board_idx) from pv_board
+ 	</select>
+ 	
+ 	<delete id="deleteBoard" parameterType="java.lang.Integer">
+ 		delete from pv_board where pv_board_idx=#{pv_board_idx}
+ 	</delete>
+</mapper>
